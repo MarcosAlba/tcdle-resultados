@@ -23,12 +23,23 @@ export function idCarrera(anio: number, fechaNro: number, nombre: string): strin
     return `${anio}-${String(fechaNro).padStart(2, "0")}-${slug(nombre)}`;
 }
 
+/**
+ * Marcas mal cargadas en la ACTC. En 2022 y 2023 los Toyota (Rossi, Jakos y
+ * Gini) figuran como "Y": desde 2024 los mismos pilotos aparecen como "Toyota".
+ */
+const MARCAS_CORREGIDAS: Record<string, string> = { Y: "Toyota" };
+
+export function corregirMarca(marca: string): string {
+    const limpia = marca.trim();
+    return MARCAS_CORREGIDAS[limpia] ?? limpia;
+}
+
 export function normalizarFila(fila: FilaCruda): Resultado {
     return {
         posicion: fila.posicion,
         numero: fila.numero,
         piloto: invertirNombre(fila.piloto),
-        marca: fila.marca,
+        marca: corregirMarca(fila.marca),
         vueltas: fila.vueltas,
         diferencia: fila.posicion === 1 ? null : fila.diferencia,
     };

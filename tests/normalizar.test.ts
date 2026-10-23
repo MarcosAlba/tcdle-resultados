@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { armarCarrera, idCarrera, invertirNombre, slug } from "../src/normalizar.ts";
+import { armarCarrera, corregirMarca, idCarrera, invertirNombre, slug } from "../src/normalizar.ts";
 import { problemasCarrera } from "../src/validar.ts";
 import type { FilaCruda } from "../src/tipos.ts";
 
@@ -62,7 +62,22 @@ describe("armarCarrera", () => {
     });
 });
 
+describe("corregirMarca", () => {
+    it("pasa la Y de 2022-2023 a Toyota y deja el resto igual", () => {
+        expect(corregirMarca("Y")).toBe("Toyota");
+        expect(corregirMarca(" Ford (Mustang) ")).toBe("Ford (Mustang)");
+        const c = armarCarrera(2023, 1, [fila(1, 1, "Rossi, Matías", "Y", null), fila(2, 2, "Jakos, Andrés", "Y", "1.0")]);
+        expect(c.resultados.map((r) => r.marca)).toEqual(["Toyota", "Toyota"]);
+    });
+});
+
 describe("problemasCarrera", () => {
+    it("avisa una marca sospechosa", () => {
+        const c = armarCarrera(2023, 1, [fila(1, 1, "Rossi, Matías", "Ford", null), fila(2, 2, "Jakos, Andrés", "Ford", "1.0")]);
+        c.resultados[1]!.marca = "Z";
+        expect(problemasCarrera(c).some((m) => m.includes("marca sospechosa"))).toBe(true);
+    });
+
     it("detecta posiciones salteadas y pilotos repetidos", () => {
         const c = armarCarrera(2019, 5, [
             fila(1, 5, "Rossi, Matías", "Ford", null),

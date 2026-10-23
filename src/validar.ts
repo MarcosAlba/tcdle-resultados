@@ -12,6 +12,7 @@ export function problemasCarrera(c: Carrera): string[] {
         if (r.posicion !== i + 1) p.push(`posición ${r.posicion} donde iba ${i + 1}`);
         if (!r.piloto) p.push(`posición ${r.posicion} sin piloto`);
         if (!Number.isInteger(r.numero)) p.push(`posición ${r.posicion} sin número`);
+        if (r.marca.length < 3) p.push(`posición ${r.posicion} con marca sospechosa "${r.marca}"`);
     });
     const pilotos = c.resultados.map((r) => r.piloto);
     if (new Set(pilotos).size !== pilotos.length) p.push("piloto repetido");
