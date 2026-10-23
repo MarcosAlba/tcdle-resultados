@@ -1,0 +1,39 @@
+# Cada lunes vuelve a scrapear las finales del TC (lo ya bajado sale del caché
+# de la corrida, así que solo pide lo nuevo), valida y abre un PR con el JSON.
+# No publica nada: el JSON llega a TCdle cuando se pone un tag y se corre
+# `npm run carreras` allá (ver README).
+name: Actualizar resultados
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: npm run scrapear
+      - run: npm run validar
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: Actualiza los resultados del TC
+          title: Actualiza los resultados del TC
+          body: Resultados nuevos de las finales del TC, validados por `npm run validar`. Revisar el diff antes de mergear.
+          branch: actualizar-resultados
+          add-paths: datos/carreras-tc.json
