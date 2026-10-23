@@ -11,6 +11,7 @@ export function problemasCarrera(c: Carrera): string[] {
     c.resultados.forEach((r, i) => {
         if (r.posicion !== i + 1) p.push(`posición ${r.posicion} donde iba ${i + 1}`);
         if (!r.piloto) p.push(`posición ${r.posicion} sin piloto`);
+        if (!r.apellido || !r.piloto.endsWith(r.apellido)) p.push(`posición ${r.posicion} con apellido "${r.apellido}"`);
         if (!Number.isInteger(r.numero)) p.push(`posición ${r.posicion} sin número`);
         if (r.marca.length < 3) p.push(`posición ${r.posicion} con marca sospechosa "${r.marca}"`);
     });

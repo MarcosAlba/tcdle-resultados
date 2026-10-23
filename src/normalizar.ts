@@ -1,5 +1,12 @@
 import type { Carrera, FilaCruda, Resultado } from "./tipos.ts";
 
+/** "Rossi, Matías" → "Rossi". Sin coma, la última palabra. */
+export function extraerApellido(crudo: string): string {
+    const limpio = crudo.trim().replace(/\s+/g, " ");
+    const i = limpio.indexOf(",");
+    return i === -1 ? (limpio.split(" ").pop() ?? limpio) : limpio.slice(0, i).trim();
+}
+
 /** "Rossi, Matías" → "Matías Rossi". Sin coma se deja como viene. */
 export function invertirNombre(crudo: string): string {
     const limpio = crudo.trim().replace(/\s+/g, " ");
@@ -39,6 +46,7 @@ export function normalizarFila(fila: FilaCruda): Resultado {
         posicion: fila.posicion,
         numero: fila.numero,
         piloto: invertirNombre(fila.piloto),
+        apellido: extraerApellido(fila.piloto),
         marca: corregirMarca(fila.marca),
         vueltas: fila.vueltas,
         diferencia: fila.posicion === 1 ? null : fila.diferencia,

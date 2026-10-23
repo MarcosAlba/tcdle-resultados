@@ -9,6 +9,8 @@ export interface Resultado {
     numero: number;
     /** "Nombre Apellido", ya invertido respecto de la ACTC ("Apellido, Nombre"). */
     piloto: string;
+    /** Lo que la ACTC pone antes de la coma: "Ponce de León", "Catalán Magni". */
+    apellido: string;
     marca: string;
     vueltas: number;
     /** Diferencia con el ganador tal cual la informa la ACTC; null para el ganador. */

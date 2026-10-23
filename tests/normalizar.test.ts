@@ -54,6 +54,7 @@ describe("armarCarrera", () => {
             "Gabriel Ponce de León",
             "Christian Ledesma",
         ]);
+        expect(c.resultados.map((r) => r.apellido)).toEqual(["Rossi", "Ponce de León", "Ledesma"]);
         expect(c.resultados[0]?.diferencia).toBeNull();
         expect(problemasCarrera(c)).toEqual([]);
     });
