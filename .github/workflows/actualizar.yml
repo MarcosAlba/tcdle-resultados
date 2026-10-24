@@ -29,11 +29,15 @@ jobs:
       - run: npm test
       - run: npm run scrapear
       - run: npm run validar
+      - run: npm run fotos
 
       - uses: peter-evans/create-pull-request@v7
         with:
           commit-message: Actualiza los resultados del TC
           title: Actualiza los resultados del TC
-          body: Resultados nuevos de las finales del TC, validados por `npm run validar`. Revisar el diff antes de mergear.
+          body: Resultados nuevos de las finales del TC, validados por `npm run validar`, y fotos de pilotos nuevos. Revisar el diff (y mirar las fotos) antes de mergear.
           branch: actualizar-resultados
-          add-paths: datos/carreras-tc.json
+          add-paths: |
+            datos/carreras-tc.json
+            datos/fotos-pilotos.json
+            datos/fotos/

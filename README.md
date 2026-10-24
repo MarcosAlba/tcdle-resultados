@@ -23,6 +23,15 @@ npm test
 
 Una carrera sin final publicada (suspendida o todavía sin cargar) se avisa y se saltea; se reintenta en la próxima corrida.
 
+## Fotos de los pilotos
+
+`npm run fotos` busca una foto para cada piloto de los resultados y la deja en `datos/fotos/` (webp de 320x400), con su crédito en `datos/fotos-pilotos.json`:
+
+1. **ACTC**: el "torso" con fondo transparente de los pilotos activos (sale de los listados de las seis categorías).
+2. **Wikipedia / Wikimedia Commons**: la imagen principal del artículo del piloto. Para no traer homónimos ni fotos que no son de él, solo vale si el artículo está en la categoría de pilotos del TC (o TC Pista / TC Mouras), si el archivo nombra al piloto y si Commons no la cataloga como foto de un auto. Se guardan autor, licencia y enlace a la original: TCdle los muestra en su página de créditos.
+
+No vuelve a bajar las que ya están. Conviene mirar las nuevas antes de publicar.
+
 ## Contrato
 
 `datos/carreras-tc.json` cumple `CatalogoCarreras` de `src/tipos.ts`: `{ version, generado, carreras }`, con cada carrera ordenada por fecha y sus resultados por posición. El `id` (`2019-05-rosario`) es estable. Un cambio incompatible sube `version`.
