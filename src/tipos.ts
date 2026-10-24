@@ -37,22 +37,15 @@ export interface CatalogoCarreras {
 }
 
 /**
- * Foto de un piloto de los resultados (datos/fotos-pilotos.json). La imagen
- * está en datos/fotos/<archivo>. Las de Wikimedia Commons piden citar autor y
- * licencia: TCdle los muestra en su página de créditos.
+ * Foto de un piloto de los resultados (datos/fotos-pilotos.json), sacada de la
+ * ACTC. La imagen está en datos/fotos/<archivo>.
  */
 export interface FotoPiloto {
-    /** Nombre como figura en los resultados: "Gabriel Ponce de León". */
+    /** Nombre como figura en los resultados: "Matías Rodríguez". */
     piloto: string;
-    /** "ponce-de-leon-gabriel.webp" */
+    /** "rodriguez-matias.webp" */
     archivo: string;
-    fuente: "actc" | "wikimedia";
-    /** Texto plano: "Adriel 00", "ACTC". */
-    autor: string;
-    /** "CC BY-SA 4.0"; null en las de la ACTC. */
-    licencia: string | null;
-    licenciaUrl: string | null;
-    /** Dónde se ve la original (página del archivo en Commons o imagen de la ACTC). */
+    /** La imagen original en el sitio de la ACTC. */
     origenUrl: string;
 }
 

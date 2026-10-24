@@ -25,12 +25,7 @@ Una carrera sin final publicada (suspendida o todavía sin cargar) se avisa y se
 
 ## Fotos de los pilotos
 
-`npm run fotos` busca una foto para cada piloto de los resultados y la deja en `datos/fotos/` (webp de 320x400), con su crédito en `datos/fotos-pilotos.json`:
-
-1. **ACTC**: el "torso" con fondo transparente de los pilotos activos (sale de los listados de las seis categorías).
-2. **Wikipedia / Wikimedia Commons**: la imagen principal del artículo del piloto. Para no traer homónimos ni fotos que no son de él, solo vale si el artículo está en la categoría de pilotos del TC (o TC Pista / TC Mouras), si el archivo nombra al piloto y si Commons no la cataloga como foto de un auto. Se guardan autor, licencia y enlace a la original: TCdle los muestra en su página de créditos.
-
-No vuelve a bajar las que ya están. Conviene mirar las nuevas antes de publicar.
+`npm run fotos` baja el "torso" con fondo transparente que la ACTC publica de cada piloto activo (sale de los listados de las seis categorías) y lo deja en `datos/fotos/` (webp de 320x400), con su origen en `datos/fotos-pilotos.json`. Los pilotos que no tienen foto en la ACTC no llevan foto: TCdle les muestra su silueta genérica. No vuelve a bajar las que ya están.
 
 ## Contrato
 
